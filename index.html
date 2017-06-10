@@ -1,0 +1,52 @@
+<html ng-app='myCharts'>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <title>MyCharts</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script src="js/app.js">        
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    </head>
+    <body>
+        <div class="row">
+            <canvas id="myChart"></canvas>
+            <script>
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                  type: 'line',
+                  data: {
+                    labels: [],
+                    datasets: [{
+                      label: [],
+                      data: [],
+                      backgroundColor: "rgba(153,255,51,0.4)"
+                    }]
+                  }
+                });
+            </script>
+        </div>
+        <div ng-controller='chartsControl as chart' class="row">
+            <div id="left">
+                <input type="text" id="input" ng-change='chart.nameChange()' ng-focus="chart.focus()" ng-model='chart.name' placeholder="Dataset Name">
+                <br>
+                <textarea cols="30" rows="5" id="txtareapts" ng-focus="chart.focus()" ng-change="chart.focusRemoved()" ng-model='chart.txtpnts' placeholder="Data Points">
+                </textarea>
+                <button value="clear" id="btn_clear" ng-click="chart.clear()">Clear</button>
+            </div>
+            <div id="right">
+                <h6 class="red">R</h6>
+                <input type="text" id="inputR" ng-change='chart.changeR()' ng-focus="chart.focus()" ng-model='chart.R' placeholder="R">
+                
+                <h6 class="green">G</h6>
+                <input type="text" id="inputG" ng-change='chart.changeG()' ng-focus="chart.focus()" ng-model='chart.G' placeholder="G">
+                
+                <h6 class="blue">B</h6>
+                <input type="text" id="inputB" ng-change='chart.changeB()' ng-focus="chart.focus()" ng-model='chart.B' placeholder="B">
+                
+                <h6>A</h6>
+                <input type="text" id="inputA" ng-change='chart.changeA()' ng-focus="chart.focus()" ng-model='chart.A' placeholder="A">
+            </div>
+            <p>{{chart.info}}</p>
+        </div>
+    </body>
+</html>
